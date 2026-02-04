@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Surprise 💖</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        font-family: 'Comic Sans MS', cursive;
+    }
+
+    .container {
+        text-align: center;
+        z-index: 10;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #fff;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 8px #ff4d6d;
+    }
+
+    button {
+        padding: 15px 35px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.3s;
+    }
+
+    #yesBtn {
+        background: #ff4d6d;
+        color: white;
+    }
+
+    #noBtn {
+        background: #fff;
+        color: #ff4d6d;
+        position: absolute;
+    }
+
+    .missed {
+        display: none;
+        font-size: 1.5rem;
+        color: white;
+        margin-top: 20px;
+        animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+        0% { transform: scale(0); }
+        100% { transform: scale(1); }
+    }
+
+    .final-msg {
+        display: none;
+        font-size: 1.8rem;
+        color: #fff;
+        line-height: 1.6;
+        animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        font-size: 24px;
+        color: #ff4d6d;
+        animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(100vh) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-10vh) scale(1.5);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container" id="mainContent">
+    <h1>Will you be my Valentine bubi? 💘</h1>
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 🙈</button>
+    <div class="missed" id="missedText">😜 You missed!</div>
+</div>
+
+<div class="container final-msg" id="finalMsg">
+    💕 I knew you will say YES 💕<br><br>
+    Mera ublu love from your buba 💖<br>
+    We will meet on <b>14th Feb</b><br>
+    with <b>godi huggies 🤗</b><br>
+    and <b>kisses 😘</b>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const missedText = document.getElementById("missedText");
+    const mainContent = document.getElementById("mainContent");
+    const finalMsg = document.getElementById("finalMsg");
+
+    // Move NO button
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 100);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+        missedText.style.display = "block";
+    });
+
+    // Grow YES button
+    let yesScale = 1;
+    yesBtn.addEventListener("mouseover", () => {
+        yesScale += 0.1;
+        yesBtn.style.transform = `scale(${yesScale})`;
+    });
+
+    // YES click action
+    yesBtn.addEventListener("click", () => {
+        mainContent.style.display = "none";
+        finalMsg.style.display = "block";
+        startHeartRain();
+    });
+
+    // Heart balloons
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }
+
+    // Initial floating hearts
+    setInterval(createHeart, 300);
+
+    // After YES – full heart rain
+    function startHeartRain() {
+        setInterval(createHeart, 150);
+    }
+</script>
+
+</body>
+</html>
