@@ -2,126 +2,85 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For My Aaki 💖</title>
+<title>Will You Be My Valentine?</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    font-family: 'Comic Sans MS', cursive;
-}
-
-.container {
-    text-align: center;
-    z-index: 5;
-}
-
-h1 {
-    color: white;
-    font-size: 2.3rem;
-    animation: glow 1.5s infinite alternate;
-}
-
-@keyframes glow {
-    from { text-shadow: 0 0 5px #fff; }
-    to { text-shadow: 0 0 20px #ff004f; }
-}
-
-.aaki {
-    font-size: 1.8rem;
-    color: #fff;
-    margin-bottom: 20px;
-    animation: pop 1s infinite alternate;
-}
-
-@keyframes pop {
-    from { transform: scale(1); }
-    to { transform: scale(1.1); }
-}
-
-button {
-    padding: 15px 35px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    margin: 10px;
-}
-
-#yesBtn {
-    background: #ff004f;
-    color: white;
-    transition: transform 0.3s;
-}
-
-#noBtn {
-    background: white;
-    color: #ff004f;
-    position: absolute;
-}
-
-.missed {
-    display: none;
-    color: white;
-    font-size: 1.4rem;
-    margin-top: 15px;
-}
-
-.final {
-    display: none;
-    color: white;
-    font-size: 1.6rem;
-    line-height: 1.6;
-    animation: fadeIn 1s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-/* hearts */
-.heart {
-    position: absolute;
-    font-size: 22px;
-    animation: float 6s linear infinite;
-}
-
-@keyframes float {
-    0% {
-        transform: translateY(100vh);
-        opacity: 1;
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        background: #ffd1dc;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
     }
-    100% {
-        transform: translateY(-10vh);
-        opacity: 0;
+    .card {
+        background: white;
+        padding: 40px 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        text-align: center;
+        max-width: 400px;
+        animation: fadeIn 0.8s ease;
     }
-}
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    h1 {
+        font-size: 1.9rem;
+        color: #ff3366;
+        margin-bottom: 25px;
+    }
+    button {
+        padding: 15px 28px;
+        font-size: 1.2rem;
+        border: 0;
+        border-radius: 8px;
+        margin: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    #yesBtn {
+        background: #ff3366;
+        color: white;
+    }
+    #noBtn {
+        background: #fff;
+        color: #ff3366;
+        border: 2px solid #ff3366;
+        position: absolute;
+    }
+    .final-msg {
+        display: none;
+        font-size: 1.4rem;
+        color: #ff3366;
+        padding: 20px;
+    }
+    .heart {
+        position: absolute;
+        font-size: 22px;
+        animation: float 6s ease-in infinite;
+    }
+    @keyframes float {
+        0% { transform: translateY(100vh); opacity: 1; }
+        100% { transform: translateY(-20vh); opacity: 0; }
+    }
 </style>
 </head>
 
 <body>
 
-<!-- background music -->
-<audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
-<div class="container" id="main">
-    <div class="aaki">Hey Aaki 💕</div>
-    <h1>Will you be my Valentine, bubi? 💘</h1>
-    <button id="yesBtn">YES 💖</button>
-    <button id="noBtn">NO 🙈</button>
-    <div class="missed" id="missed">😜 You missed again!</div>
+<div class="card" id="mainCard">
+    <h1>Will you be my Valentine, Aaki?</h1>
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 🙈</button>
 </div>
 
-<div class="container final" id="finalMsg">
+<div class="final-msg" id="finalMsg">
     💕 I knew you will say YES 💕<br><br>
     Mera ublu love from your <b>buba</b> 💖<br>
     We will meet on <b>14th Feb</b> ❤️<br>
@@ -130,50 +89,45 @@ button {
 </div>
 
 <script>
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const missed = document.getElementById("missed");
-const main = document.getElementById("main");
-const finalMsg = document.getElementById("finalMsg");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const mainCard = document.getElementById("mainCard");
+    const finalMsg = document.getElementById("finalMsg");
 
-function moveNo() {
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 120);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-    missed.style.display = "block";
-}
+    function moveNo() {
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 120);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
 
-noBtn.addEventListener("mouseover", moveNo);
-noBtn.addEventListener("touchstart", moveNo);
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
 
-let scale = 1;
-yesBtn.addEventListener("mouseover", () => {
-    scale += 0.15;
-    yesBtn.style.transform = `scale(${scale})`;
-});
+    let scale = 1;
+    yesBtn.addEventListener("mouseover", () => {
+        scale += 0.15;
+        yesBtn.style.transform = `scale(${scale})`;
+    });
 
-yesBtn.addEventListener("click", () => {
-    main.style.display = "none";
-    finalMsg.style.display = "block";
-    heartStorm();
-});
+    yesBtn.addEventListener("click", () => {
+        mainCard.style.display = "none";
+        finalMsg.style.display = "block";
+        heartRain();
+    });
 
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }
 
-setInterval(createHeart, 400);
-
-function heartStorm() {
-    setInterval(createHeart, 120);
-}
+    function heartRain() {
+        setInterval(createHeart, 200);
+    }
 </script>
 
 </body>
