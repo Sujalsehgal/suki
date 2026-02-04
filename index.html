@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Aaki 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.container {
+    text-align: center;
+    z-index: 5;
+}
+
+h1 {
+    color: white;
+    font-size: 2.3rem;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px #fff; }
+    to { text-shadow: 0 0 20px #ff004f; }
+}
+
+.aaki {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 20px;
+    animation: pop 1s infinite alternate;
+}
+
+@keyframes pop {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+button {
+    padding: 15px 35px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#yesBtn {
+    background: #ff004f;
+    color: white;
+    transition: transform 0.3s;
+}
+
+#noBtn {
+    background: white;
+    color: #ff004f;
+    position: absolute;
+}
+
+.missed {
+    display: none;
+    color: white;
+    font-size: 1.4rem;
+    margin-top: 15px;
+}
+
+.final {
+    display: none;
+    color: white;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* hearts */
+.heart {
+    position: absolute;
+    font-size: 22px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- background music -->
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="main">
+    <div class="aaki">Hey Aaki 💕</div>
+    <h1>Will you be my Valentine, bubi? 💘</h1>
+    <button id="yesBtn">YES 💖</button>
+    <button id="noBtn">NO 🙈</button>
+    <div class="missed" id="missed">😜 You missed again!</div>
+</div>
+
+<div class="container final" id="finalMsg">
+    💕 I knew you will say YES 💕<br><br>
+    Mera ublu love from your <b>buba</b> 💖<br>
+    We will meet on <b>14th Feb</b> ❤️<br>
+    with <b>godi huggies 🤗</b><br>
+    and lots of <b>kisses 😘😘</b>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const missed = document.getElementById("missed");
+const main = document.getElementById("main");
+const finalMsg = document.getElementById("finalMsg");
+
+function moveNo() {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 120);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    missed.style.display = "block";
+}
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+let scale = 1;
+yesBtn.addEventListener("mouseover", () => {
+    scale += 0.15;
+    yesBtn.style.transform = `scale(${scale})`;
+});
+
+yesBtn.addEventListener("click", () => {
+    main.style.display = "none";
+    finalMsg.style.display = "block";
+    heartStorm();
+});
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 400);
+
+function heartStorm() {
+    setInterval(createHeart, 120);
+}
+</script>
+
+</body>
+</html>
